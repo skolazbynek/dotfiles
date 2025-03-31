@@ -15,7 +15,16 @@ local M = {
 				},
 				indent = {
 					enable = true,
-				}
+				},
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+				init_selection = "<leader>ss",
+				node_incremental = "<C-s>",
+				scope_incremental = "<C-S>",
+				node_decremental = "<C-b>",
+					}
+				},
 			})
 		end
 	}

@@ -21,3 +21,6 @@ require("lazy").setup("plugins")
 require("config")
 require("config.keymap")
 
+-- by default start with transparent background
+require("config").background_switch()
+

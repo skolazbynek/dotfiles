@@ -8,9 +8,10 @@ vim.opt.relativenumber = true
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldminlines = 5
+vim.opt.foldenable = false
 
-start_with_open_folds_group = vim.api.nvim_create_augroup("DefaultOpenFolds", {})
-vim.api.nvim_create_autocmd({'BufReadPost','FileReadPost'}, {group=start_with_open_folds_group, command='normal zR'})
+-- start_with_open_folds_group = vim.api.nvim_create_augroup("DefaultOpenFolds", {})
+-- vim.api.nvim_create_autocmd({'BufReadPost','FileReadPost'}, {group=start_with_open_folds_group, command='normal zR'})
 
 -- highlight on yank
 vim.cmd([[
@@ -36,7 +37,6 @@ local background_switch = function()
 	hl_group = vim.api.nvim_get_hl(0, {name="Normal", create=false})
 	if hl_group.bg then
 		vim.cmd.highlight('Normal guibg=None')
-		vim.cmd.highlight('NormalFloat guibg=None')
 		vim.cmd.highlight('LineNr guibg=None')
 
 	else

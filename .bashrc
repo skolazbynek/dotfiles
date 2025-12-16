@@ -35,10 +35,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# show git branch
-source ~/.git-prompt.sh
-GIT_PROMPT='$(__git_ps1 " (%s)")\$ '
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -129,3 +125,17 @@ alias gl='git log --oneline -n 5'
 alias ga='git add'
 alias gc='git commit -m'
 alias penv='deactivate; eval $(poetry env activate)'
+. "$HOME/.cargo/env"
+
+# Source private aliases / settings
+if [ -f "$HOME/.bashrc_private" ]; then
+	source "$HOME/.bashrc_private"
+fi
+
+# Jujutsu autocompletion
+if command -v jj > /dev/null 2>&1; then
+	source <(COMPLETE=bash jj)
+fi
+
+# vrun command autocompletion
+complete -o default -o bashdefault vrun

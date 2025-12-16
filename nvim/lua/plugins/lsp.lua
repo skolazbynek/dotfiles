@@ -2,7 +2,6 @@ local M = {
 	{
 		'williamboman/mason.nvim',
 		opts = {
-			log_level = vim.log.levels.DEBUG,
 			pip = {
 				upgrade_pip = false
 			}
@@ -14,8 +13,9 @@ local M = {
 			'williamboman/mason.nvim',
 		},
 		opts = {
+			automatic_enable = false,
 			ensure_installed = {
-				'pylsp', 'lua_ls', 'gopls', 'basedpyright'
+				'lua_ls', 'gopls', 'basedpyright', 'pylsp', 'marksman'
 			}
 		}
 	},
@@ -30,43 +30,9 @@ local M = {
 		config = function()
 			local capabilities = require('cmp_nvim_lsp').default_capabilities()
 			local lspconfig = require('lspconfig')
-			-- require('lspconfig').pylsp.setup{
-				-- capabilities = capabilities,
-				-- settings = {
-					-- pylsp = {
-						-- rope = {
-							-- ropeFolder = '.ropefolder'
-						-- },
-						-- configurationSources = { "flake8" },
-						-- plugins = {
-							-- pycodestyle = {
-								-- enabled = false
-							-- },
-							-- mccabe = {
-								-- enabled = false
-							-- },
-							-- pyflakes = {
-								-- enabled = false
-							-- },
-							-- flake8 = {
-								-- enabled = true
-							-- },
-							-- rope_autoimport = {
-								-- enabled = true
-							-- },
-							-- rope_completion = {
-								-- enabled = false
-							-- },
-							-- jedi_completion = {
-								-- enabled = true
-							-- },
-						-- },
-					-- }
-				-- }
-			-- }
 			lspconfig.marksman.setup{}
 			lspconfig.gopls.setup{}
-			lspconfig.basedpyright.setup{
+			vim.lsp.config('basedpyright', {
 				capabilities = capabilities,
 				settings = {
 					basedpyright = {
@@ -74,8 +40,49 @@ local M = {
 							typeCheckingMode = "off"
 						}
 					}
+				},
+			})
+			vim.lsp.enable('basedpyright')
+			vim.lsp.config('pylsp', {
+				settings = {
+					pylsp = {
+						configurationSources = {
+							'flake8'
+						},
+						plugins = {
+							pycodestyle = {
+								enabled = false
+							},
+							pyflakes = {
+								enabled = false
+							},
+							mccabe = {
+								enabled = false
+							},
+							flake8 = {
+								enabled = true
+							},
+							pylsp_mypy = {
+								follow_imports = "normal",
+							},
+							jedi_completion = {
+								enabled = false
+							},
+							jedi_definition = {
+								enabled = false
+							},
+							jedi_hover = {
+								enabled = false,
+							},
+							jedi_references = {
+								enabled = false
+							},
+						}
+					}
 				}
-			}
+			})
+			vim.lsp.enable('pylsp')
+
 		end,
 	},
 }

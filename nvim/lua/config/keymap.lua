@@ -1,8 +1,8 @@
 vim.keymap.set("n", "<leader>pv", ":Neotree action=focus position=left source=filesystem<CR>")
 vim.keymap.set("n", "<leader>ls", ":Neotree action=focus position=float source=buffers<CR>")
 vim.keymap.set("i", "jk", "<Esc>:w<CR>")
-vim.keymap.set({"v", "n"}, "<C-v>", [["*p]])
-vim.keymap.set({"v", "n"}, "<C-c>", [["*y]])
+vim.keymap.set({"v", "n"}, "<C-v>", [["+p]])
+vim.keymap.set({"v", "n"}, "<C-c>", [["+y]])
 vim.keymap.set("n", "<C-h>", "<C-w>h") 
 vim.keymap.set("n", "<C-j>", "<C-w>j") 
 vim.keymap.set("n", "<C-k>", "<C-w>k") 
@@ -11,7 +11,10 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h") 
 vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j") 
 vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k") 
-vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l") 
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l")
+
+-- Map the control character \u001b[13;5u to Ctrl+Enter in terminal mode
+vim.keymap.set("t", "<Esc>[13;5u", "<C-CR>", { noremap = true}) 
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

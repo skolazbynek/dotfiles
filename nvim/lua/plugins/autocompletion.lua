@@ -2,8 +2,8 @@ local M = {
 	{"onsails/lspkind.nvim"},
 	{'hrsh7th/cmp-nvim-lsp'},
 	{'hrsh7th/cmp-buffer'},
-	{"hrsh7th/cmp-nvim-lsp-signature-help"},
 	{"hrsh7th/cmp-cmdline"},
+	{ 'tzachar/fuzzy.nvim' },
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
 	{
 		"tzachar/fuzzy.nvim",
@@ -24,14 +24,9 @@ local M = {
 		dependencies = {
 			'hrsh7th/cmp-nvim-lsp',
 		},
-
 		config = function()
 			local cmp = require('cmp')
 			cmp.setup({
-				--snippet = {
-				--	expand = function(args)
-				--		require('luasnip').lsp_expand(args.body)
-				--	end,
 				formatting = {
 					format = function(entry, vim_item)
 						if vim.tbl_contains({ 'path' }, entry.source.name) then
@@ -47,7 +42,6 @@ local M = {
 							menu = {
 								buffer = "[Buffer]",
 								nvim_lsp = "[LSP]",
-								nvim_lsp_signature_help = "[LSP-sig]",
 								treesitter = "[Tree]",
 								fuzzy_buffer = "[Fuzzy]",
 							},
@@ -75,7 +69,6 @@ local M = {
 					["<C-Space>"] = cmp.mapping.complete(),
 				}),
 				sources = cmp.config.sources({
-					{ name = 'nvim_lsp_signature_help' },
 					{ name = 'nvim_lsp',
 						 max_item_count = 20,
 					},

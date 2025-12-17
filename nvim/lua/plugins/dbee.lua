@@ -1,6 +1,7 @@
 local M = {
 	{
 		"kndndrj/nvim-dbee",
+		cmd = { "DbeeToggle", "Dbee" },
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},

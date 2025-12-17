@@ -1,6 +1,7 @@
 M = {
 	{
-	'tpope/vim-fugitive',
+		'tpope/vim-fugitive',
+		cmd = { "Git", "G", "Gwrite", "Gread", "Gdiffsplit", "Gvdiffsplit" },
 	},
 	{
 		'shumphrey/fugitive-gitlab.vim',

@@ -13,8 +13,7 @@ local M = {
 	},
 	{
 		"OXY2DEV/markview.nvim",
-		lazy = false,      -- Recommended
-		-- ft = "markdown" -- If you decide to lazy-load anyway
+		ft = "markdown", -- Lazy-load on markdown files
 
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",

@@ -13,9 +13,6 @@ vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j")
 vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k") 
 vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l")
 
--- Map the control character \u001b[13;5u to Ctrl+Enter in terminal mode
-vim.keymap.set("t", "<Esc>[13;5u", "<C-CR>", { noremap = true}) 
-
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fl', builtin.live_grep, {})
@@ -60,4 +57,7 @@ vim.keymap.set('n', "<leader>bb", "Obreakpoint()<Esc>")
 
 local dbee = require("dbee")
 vim.keymap.set('n', "<leader>db", dbee.toggle)
+
+vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
 

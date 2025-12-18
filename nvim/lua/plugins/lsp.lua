@@ -13,7 +13,6 @@ local M = {
 		dependencies = {
 			'williamboman/mason.nvim',
 		},
-		-- Load after file is displayed, but defer the actual setup
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			automatic_enable = false,
@@ -30,8 +29,6 @@ local M = {
 			'williamboman/mason-lspconfig.nvim',
 			'hrsh7th/cmp-nvim-lsp'
 		},
-		-- Load after file is displayed (BufReadPost = after file content is loaded)
-		-- This allows the file to show immediately while LSP loads in background
 		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			-- Defer LSP setup to next event loop tick
@@ -40,10 +37,10 @@ local M = {
 				local lspconfig = vim.lsp.config
 				
 				-- Configure LSP servers
-				lspconfig.marksman = {}
-				lspconfig.gopls = {}
+				lspconfig('marksman', {})
+				lspconfig('gopls', {})
 				
-				lspconfig.basedpyright = {
+				lspconfig('basedpyright', {
 					capabilities = capabilities,
 					settings = {
 						basedpyright = {
@@ -52,9 +49,9 @@ local M = {
 							}
 						}
 					},
-				}
+				})
 				
-				lspconfig.pylsp = {
+				lspconfig('pylsp', {
 					settings = {
 						pylsp = {
 							configurationSources = {
@@ -91,7 +88,8 @@ local M = {
 							}
 						}
 					}
-				}
+				})
+				vim.lsp.enable({'marksman', 'gopls', 'basedpyright', 'pylsp'})
 			end, 0) -- 0ms delay = next event loop tick
 		end,
 	},
